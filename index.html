@@ -18,6 +18,12 @@ body{margin:0;background:#8a8a8a;font:12px/1.5 Verdana,Tahoma,sans-serif;color:v
 .logo{font:900 66px/1 Impact,"Arial Black",sans-serif;letter-spacing:2px;color:#e9e9ef;text-shadow:2px 2px 0 #7d86b8,4px 4px 6px #000;cursor:pointer}
 .tag{font:italic 15px/1.2 Georgia,serif;color:#fff;max-width:210px;margin-left:auto;text-align:right}
 .officer{width:120px;height:96px;flex:none}
+/* Banner images: no placeholder background, fit inside the box, officer sits on the bottom edge */
+.banner .img{background:none!important;color:#ffffff99}
+.banner .img img{object-fit:contain}
+.banner .badge img{object-position:center}
+.banner .officer{align-self:flex-end;height:112px;margin:0 0 -10px}
+.banner .officer img{object-position:bottom}
 .nav{background:#2d2d2d;border-bottom:3px solid var(--gold);text-align:center;padding:4px 6px}
 .nav a{color:#bdbdbd;font-size:10px;text-transform:uppercase;letter-spacing:.5px;margin:0 7px;text-decoration:none;cursor:pointer;display:inline-block;padding:2px 0}
 .nav a:hover,.nav a.on,.nav a:focus-visible{color:var(--gold);outline:none}
@@ -31,6 +37,7 @@ h2{font:bold 13px Verdana;color:var(--navy);border-bottom:2px solid var(--gold);
 .hero p{font:bold 11px/1.5 Verdana;color:#14246b}
 .cta{display:inline-block;margin-top:8px;font-weight:bold;color:var(--link);cursor:pointer;text-decoration:underline}
 .img{background:repeating-linear-gradient(45deg,#d9d9d9,#d9d9d9 8px,#cfcfcf 8px,#cfcfcf 16px);display:flex;align-items:center;justify-content:center;text-align:center;color:#666;font-size:10px;overflow:hidden;position:relative}
+.img.has{background:none;font-size:0}
 .img img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
 .cards{background:linear-gradient(#bbb,#999);padding:16px 14px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .card{background:#fff;border:2px solid #fff;box-shadow:0 0 0 1px #777;padding:8px 10px 10px;cursor:pointer}
@@ -145,7 +152,7 @@ const SITE = {
   /* IMAGES — leave "" for a grey placeholder. See the instructions in chat.
      Use a file path ("images/hero.jpg") or a full URL ("https://…/hero.jpg"). */
   images: {
-    badge: "images/scpdlogo.png",       // shield, ~64×78 (transparent PNG best)
+    badge: "images/SCPD.png",       // shield, ~64×78 (transparent PNG best)
     officer: "images/tester.png",     // officer cut-out in the banner, ~120×96
     hero: "images/recruit.jpg",        // big black-and-white photo on the home page, ~560×400
     videos: "images/image1.jpg",      // SCPD Videos card, ~240×96
