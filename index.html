@@ -135,7 +135,7 @@ details{border-bottom:1px solid #ddd;padding:6px 0}summary{cursor:pointer;font-w
     </section>
   </main>
   <div class="cards" id="cards-wrap" style="display:none"></div>
-  <div class="foot">&copy; 2008 CITY OF STAUNTON, DATABASE</div>
+  <div class="foot">&copy; 2008 CITY OF STAUNTON, POLICE WEBSITE</div>
 </div>
 
 <script>
@@ -235,7 +235,7 @@ function render(){
   document.querySelectorAll(".bureauSel").forEach(s=>s.innerHTML=SITE.bureaus.map(b=>`<option>${esc(b[0])}</option>`).join(""));
   const t=SITE.threat.toUpperCase();
   $("cards-wrap").innerHTML=`
-   <div class="card" tabindex="0" onclick="window.open(SITE.videoUrl,'_blank','noopener')" onkeydown="if(event.key==='Enter')window.open(SITE.videoUrl,'_blank','noopener')"><h3>SCPD VIDEOS</h3>
+   <div class="card" tabindex="0" onclick="window.open(SITE.videoUrl,'_blank','noopener')" onkeydown="if(event.key==='Enter')window.open(SITE.videoUrl,'_blank','noopener')"><h3>SCPD VIDEOS</h3>${slot("videos","VIDEO THUMBNAIL")}<p>Inside the famous SCPD<br>Join the SCPD Today!</p></div>
    <div class="card" tabindex="0" onclick="go('missing')"><h3>MISSING PERSON</h3>${slot("missing","PHOTO")}<p>Report a Missing Person<br>Provide Information</p></div>
    <div class="card" tabindex="0" onclick="go('news')"><h3>THREAT LEVEL</h3><div class="img threat" data-img="threat"><b style="background:${THREAT_COLORS[t]||"#f2c200"}">${esc(t)}</b></div><p><span class="small">${esc(SITE.threatAgency)}</span></p></div>`;
   fillImages();
