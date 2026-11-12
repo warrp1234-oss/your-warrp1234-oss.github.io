@@ -193,8 +193,8 @@ const SITE = {
 
   news: [  // [date, headline, text]
     ["October 2008","Recruitment drive opens","The Police Academy is now accepting applications for its next class."],
-    ["September 2008","Terror alert level raised to Elevated","Visible patrols have increased at bridges, tunnels and transit hubs."],
-    ["August 2008","Crime down across all five boroughs","Commissioner credits increased foot patrols."]
+    ["September 2008","Terror alert level decreased to Low","Safety assured, says Commissioner."],
+    ["August 2008","Crime down across all five boroughs","Commissioner credits increased Auxiliary presence."]
   ],
 
   faq: [
@@ -206,7 +206,7 @@ const SITE = {
   ],
 
   contacts: [["Emergency","911"],["Non-emergency","311"],["Crime Stoppers","1-800-555-TIPS"],["Internal Affairs","(555) 010-0099"],["Police Academy","(555) 010-0100"],["Headquarters","One Police Plaza, Staunton City, Staunton"]],
-  staff: "Commissioner: [Name]. Discord: [invite link]. Edit this line."
+  staff: "Commissioner: N/A. Discord: TBA. Edit this line."
 };
 /* ===================================================================== */
 
@@ -215,7 +215,7 @@ const NAV=[["home","Home"],["about","About"],["news","News"],["precincts","Preci
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const slot=(k,label)=>`<div class="img" data-img="${k}">${label||k}</div>`;
-function fillImages(root){(root||document).querySelectorAll("[data-img]").forEach(e=>{const u=SITE.images[e.dataset.img];if(u&&!e.querySelector("img")){e.insertAdjacentHTML("beforeend",`<img src="${esc(u)}" alt="">`)}});}
+function fillImages(root){(root||document).querySelectorAll("[data-img]").forEach(e=>{const u=SITE.images[e.dataset.img];if(u&&!e.querySelector("img")){e.classList.add("has");[...e.childNodes].forEach(n=>{if(n.nodeType===3)n.remove()});e.insertAdjacentHTML("beforeend",`<img src="${esc(u)}" alt="">`)}});}
 const pic=(src,k)=>src?`<div class="img"><img src="${esc(src)}" alt=""></div>`:`<div class="img">${k}</div>`;
 
 function render(){
