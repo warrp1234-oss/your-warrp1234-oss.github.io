@@ -116,7 +116,7 @@ details{border-bottom:1px solid #ddd;padding:6px 0}summary{cursor:pointer;font-w
     </section>
     <section class="view" id="v-join">
       <h1>Join the SCPD</h1>
-      <p>Applicants must be at least 21 years of age, hold a clean record and pass the Police Academy. Complete the form below, then submit the generated text to the staff team.</p>
+      <p>Applicants must be at least 21 years of age, hold a clean record and pass the Police Academy. Complete the form below, then submit the generated text to the relevant police command.</p>
       <form id="f-join" onsubmit="return false">
         <div class="row"><div><label>Character name</label><input name="Character name"></div><div><label>Character age (min. 21)</label><input name="Character age" type="number" min="21"></div></div>
         <div class="row"><div><label>Preferred bureau</label><select name="Preferred bureau" class="bureauSel"></select></div><div><label>Your Discord / username</label><input name="Discord"></div></div>
@@ -252,7 +252,7 @@ function build(id,prefix){
   let t=`STAUNTON CITY POLICE DEPARTMENT\nReference: ${ref}\nDate: ${SITE.rpDate}\n----------------------------\n`;
   [...f.elements].filter(e=>e.name).forEach(e=>{t+=`${e.name}: ${e.value||"N/A"}\n`});
   o.style.display="block";
-  o.innerHTML=`<b>Copy this text and send it to the SCPD staff team.</b><textarea readonly>${esc(t)}</textarea><button class="go" onclick="this.previousElementSibling.select();document.execCommand('copy');this.textContent='Copied'">Copy to clipboard</button>`;
+  o.innerHTML=`<b>Copy this text and send it to the SCPD command.</b><textarea readonly>${esc(t)}</textarea><button class="go" onclick="this.previousElementSibling.select();document.execCommand('copy');this.textContent='Copied'">Copy to clipboard</button>`;
 }
 render();
 go((location.hash||"#home").slice(1).replace(/[^a-z]/g,"")||"home");
