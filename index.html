@@ -93,7 +93,7 @@ details{border-bottom:1px solid #ddd;padding:6px 0}summary{cursor:pointer;font-w
       <p>The Staunton City Police Department is the primary law enforcement agency of Staunton City, State of Staunton. Our officers serve the five boroughs around the clock, every day of the year.</p>
       <h2>Bureaus</h2><div id="bureaus"></div>
       <h2>Rank Structure</h2><table id="ranks"></table>
-      <h2>Core Values</h2><p><b>Fidelity. Bravery. Integrity.</b> Edit this section to match your community’s rules and standards.</p>
+      <h2>Core Values</h2><p><b>Courtesy. Professionalism. Respect.</b></p>
     </section>
     <section class="view" id="v-news"><h1>Press Releases &amp; News</h1><div id="news"></div></section>
     <section class="view" id="v-precincts"><h1>Precinct Directory</h1><p class="small">Find your local precinct. In an emergency, always dial 911.</p><table id="prec"></table></section>
@@ -145,6 +145,7 @@ details{border-bottom:1px solid #ddd;padding:6px 0}summary{cursor:pointer;font-w
 const SITE = {
   tagline: "Where the law comes first. Always.",
   rpDate: "2008",   // shown on generated reports
+  videoUrl: "https://www.youtube.com/@StauntonCityPoliceDepartment",
   blurb: "Crime is at an all-time low in Staunton City. It’s the perfect time to join the Staunton City Police Department. The SCPD has been cited by many as the finest police force in the state, especially by foreign tourists asking for directions. Build a career checking bags on the subway, writing parking tickets and chasing speeding sedans across the bridges.",
   threat: "LOW",   // LOW | GUARDED | ELEVATED | HIGH | SEVERE
   threatAgency: "State Office of Security Enforcement",
@@ -206,7 +207,7 @@ const SITE = {
   ],
 
   contacts: [["Emergency","911"],["Non-emergency","311"],["Crime Stoppers","1-800-555-TIPS"],["Internal Affairs","(555) 010-0099"],["Police Academy","(555) 010-0100"],["Headquarters","One Police Plaza, Staunton City, Staunton"]],
-  staff: "Commissioner: N/A. Discord: TBA. Edit this line."
+  staff: "Commissioner: N/A. Discord: TBA."
 };
 /* ===================================================================== */
 
@@ -234,7 +235,7 @@ function render(){
   document.querySelectorAll(".bureauSel").forEach(s=>s.innerHTML=SITE.bureaus.map(b=>`<option>${esc(b[0])}</option>`).join(""));
   const t=SITE.threat.toUpperCase();
   $("cards-wrap").innerHTML=`
-   <div class="card" tabindex="0" onclick="go('about')"><h3>SCPD VIDEOS</h3>${slot("videos","VIDEO THUMBNAIL")}<p>Inside the famous SCPD<br>Join the SCPD Today!</p></div>
+   <div class="card" tabindex="0" onclick="window.open(SITE.videoUrl,'_blank','noopener')" onkeydown="if(event.key==='Enter')window.open(SITE.videoUrl,'_blank','noopener')"><h3>SCPD VIDEOS</h3>
    <div class="card" tabindex="0" onclick="go('missing')"><h3>MISSING PERSON</h3>${slot("missing","PHOTO")}<p>Report a Missing Person<br>Provide Information</p></div>
    <div class="card" tabindex="0" onclick="go('news')"><h3>THREAT LEVEL</h3><div class="img threat" data-img="threat"><b style="background:${THREAT_COLORS[t]||"#f2c200"}">${esc(t)}</b></div><p><span class="small">${esc(SITE.threatAgency)}</span></p></div>`;
   fillImages();
