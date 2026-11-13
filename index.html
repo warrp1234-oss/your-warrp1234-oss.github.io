@@ -212,9 +212,7 @@ const SITE = {
 /* ===================================================================== */
 
 const THREAT_COLORS={LOW:"#3fa34d",GUARDED:"#4a7fd4",ELEVATED:"#f2c200",HIGH:"#f08a1c",SEVERE:"#d62f2f"};
-const NAV=[["home","Home"],["about","About"],["news","News"],["precincts","Precincts"],["wanted","Most Wanted"],["missing","Missing"],["tips","Solve a Crime"],["join","Join"],["ask","Ask SCPD"],["contact","Contact Us"]];
-const $=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const NAV=[["home","Home"],["about","About"],["news","News"],["precincts","Precincts"],["wanted","Most Wanted"],["missing","Missing"],["tips","Solve a Crime"],["join","Join"],["ask","Ask SCPD"],["database","Database"],["contact","Contact Us"]];const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const slot=(k,label)=>`<div class="img" data-img="${k}">${label||k}</div>`;
 function fillImages(root){(root||document).querySelectorAll("[data-img]").forEach(e=>{const u=SITE.images[e.dataset.img];if(u&&!e.querySelector("img")){e.classList.add("has");[...e.childNodes].forEach(n=>{if(n.nodeType===3)n.remove()});e.insertAdjacentHTML("beforeend",`<img src="${esc(u)}" alt="">`)}});}
 const pic=(src,k)=>src?`<div class="img"><img src="${esc(src)}" alt=""></div>`:`<div class="img">${k}</div>`;
@@ -241,6 +239,8 @@ function render(){
   fillImages();
 }
 function go(v){
+  if(v==="database"){location.href="database.html";return}
+  document.querySelectorAll(".view").forEach(e=>e.classList.toggle("on",e.id==="v-"+v));
   document.querySelectorAll(".view").forEach(e=>e.classList.toggle("on",e.id==="v-"+v));
   document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("on",a.dataset.v===v));
   $("cards-wrap").style.display=v==="home"?"grid":"none";
