@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<script>{const t=+sessionStorage.getItem("scpdAuth");if(!t||Date.now()-t>72e5){document.documentElement.style.display="none";location.replace("database.html")}}</script>
+<title>SCPD Records Database</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#8a8a8a;font:13px "Trebuchet MS",Verdana,sans-serif}
+.bezel{max-width:900px;margin:18px auto;background:linear-gradient(#1d1d1d,#050505);border-radius:14px 14px 6px 6px;padding:30px 26px 14px;position:relative;box-shadow:0 6px 18px #0008}
+.leds{position:absolute;top:10px;left:30px;display:flex;gap:5px}.leds i{width:9px;height:9px;background:#7a1010}.leds i:last-child{background:#0a7a2a}
+.screen{background:#02063d;color:#fff;min-height:560px;border:2px solid #000;display:flex;flex-direction:column}
+.hd{display:flex;align-items:center;gap:16px;padding:14px 22px}
+.badge{width:52px;height:62px;flex:none}.badge img,.ph img{width:100%;height:100%;object-fit:contain;display:block}
+.ttl b{font:900 46px/1 Impact,"Arial Black",sans-serif;color:#f0b81e;letter-spacing:2px}
+.stripe{height:10px;background:repeating-linear-gradient(-60deg,#f0b81e 0 10px,#02063d 10px 16px);margin:3px 0}
+.ttl span{font-weight:bold;letter-spacing:1px;font-size:17px}
+.out{margin-left:auto;text-align:right;font-size:11px;letter-spacing:1px}
+.out button{margin-top:4px;background:#e8940a;color:#fff;border:0;border-radius:6px;padding:5px 12px;font:bold 11px "Trebuchet MS";cursor:pointer}
+.tabs{display:flex;border-top:3px solid #f0b81e;border-bottom:3px solid #f0b81e}
+.tabs a{flex:1;text-align:center;padding:10px 4px;font-weight:bold;letter-spacing:3px;cursor:pointer;border-right:1px solid #1b2a7a}
+.tabs a.on,.tabs a:hover,.tabs a:focus-visible{background:#0a3aa6;color:#f0b81e;outline:none}
+.main{flex:1;padding:0}
+.home{display:flex;flex-wrap:wrap}
+.home .l{flex:1 1 300px;background:#0a3aa6;padding:18px 22px;font-size:15px;letter-spacing:.5px;line-height:1.7}
+.home .r{flex:1 1 300px;background:#02063d}
+.cap{background:#4a8cc9;font:italic bold 15px Georgia,serif;text-align:center;padding:3px}
+.ph{background:repeating-linear-gradient(45deg,#0b1a6e,#0b1a6e 10px,#0a1560 10px,#0a1560 20px);color:#7f8fd6;display:flex;align-items:center;justify-content:center;font-size:11px;text-align:center;overflow:hidden}
+.warn{margin-top:26px;width:260px;border-top:2px solid #f0b81e;border-bottom:2px solid #f0b81e;padding:8px 0;font-size:12px;font-weight:bold;color:#f0b81e;text-align:center;background:#0a2d8a}
+.warn svg{display:block;margin:0 auto 6px}
+.tool{padding:14px 20px 8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.tool input{flex:1;min-width:200px;background:#02063d;color:#fff;border:3px solid #f0b81e;padding:10px 12px;font:15px "Trebuchet MS";letter-spacing:2px;text-transform:uppercase}
+.tool span{color:#f0b81e;letter-spacing:1px;font-size:12px}
+table{width:calc(100% - 40px);margin:6px 20px 20px;border-collapse:collapse}
+th{background:#0a3aa6;color:#f0b81e;text-align:left;padding:7px 9px;letter-spacing:1px;font-size:12px}
+td{padding:8px 9px;border-bottom:1px solid #1b2a7a}
+tr.row{cursor:pointer}tr.row:hover,tr.row:focus-visible{background:#0a2d8a;outline:none}
+.tag{font-weight:bold;padding:2px 7px;border-radius:3px;font-size:11px;letter-spacing:1px;color:#fff;background:#b8860b}
+.tag.ok{background:#1f8f3a}.tag.bad{background:#c62828}
+.det{padding:18px 22px;display:flex;gap:22px;flex-wrap:wrap}
+.det .ph{width:200px;height:240px;flex:none;border:3px solid #f0b81e}
+.det dl{flex:1 1 280px;margin:0;display:grid;grid-template-columns:140px 1fr;gap:7px 12px}
+.det dt{color:#f0b81e;letter-spacing:1px;font-size:12px;font-weight:bold;text-transform:uppercase}.det dd{margin:0}
+.det a{color:#8fc4ff;cursor:pointer;text-decoration:underline}
+.bk{margin:14px 22px 0;background:#e8940a;color:#fff;border:0;border-radius:6px;padding:7px 16px;font:bold 12px "Trebuchet MS";cursor:pointer}
+.empty{padding:20px;color:#9aa8e8}
+.ft{display:flex;gap:14px;align-items:center;border-top:3px solid #f0b81e;background:#0a3aa6;padding:10px 22px;font-size:11px;letter-spacing:1px}
+.ft .badge{width:34px;height:42px}
+.keys{display:flex;gap:18px;padding:22px 40px 8px}.keys i{width:44px;height:14px;background:linear-gradient(#bbb,#666);border-radius:2px}
+.vents{height:22px;margin:6px 60px 0;background:repeating-linear-gradient(90deg,#333 0 6px,#000 6px 12px)}
+@media(max-width:640px){.hd{flex-wrap:wrap}.tabs a{letter-spacing:1px;font-size:11px}.det dl{grid-template-columns:100px 1fr}}
+</style></head><body>
+<div class="bezel"><div class="leds"><i></i><i></i><i></i></div>
+<div class="screen">
+  <div class="hd"><div class="badge" data-badge></div><div class="ttl"><b>SCPD</b><div class="stripe"></div><span>RECORDS DATABASE</span></div>
+    <div class="out">OFFICER LOGGED IN<br><button onclick="logout()">LOG OUT</button></div></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="main" id="main"></div>
+  <div class="ft"><div class="badge" data-badge></div><div>CONFIDENTIAL INFORMATION BY ORDER OF SCPD<br>FOR OFFICIAL USE ONLY</div></div>
+</div>
+<div class="keys"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vents"></div></div>
+<script>
+/* =====================================================================
+   SETTINGS & DATA — add a record by copying one line and editing it.
+   Leave img:"" for a blank photo box, or use e.g. img:"images/people/doe.jpg"
+   Status words that turn RED: wanted, stolen, suspended, revoked, expired, unregistered
+   Status words that turn GREEN: clear, valid, registered, licensed
+   ===================================================================== */
+const BADGE="images/SCPD.png", HERO="";   // HERO: home-screen photo (~480×360), "" = blank
+const MOTTO="WE SEE IT ALL. WE KNOW IT ALL.";
+
+const DB={
+ persons:{label:"PERSONS",
+  fields:"name|Name,dob|Date of birth,sex|Sex,height|Height,hair|Hair,eyes|Eyes,address|Address,licence|Driver licence,status|Status,record|Criminal record,notes|Notes",
+  cols:"name,dob,address,status",
+  data:[
+   {name:"John Doe",dob:"03/14/1975",sex:"M",height:"6'0\"",hair:"Brown",eyes:"Blue",address:"14 Harbor Avenue, North Staunton",licence:"Valid",status:"Wanted",record:"Armed robbery (2005), assault (2007)",notes:"Considered armed and dangerous. Do not approach alone.",img:""},
+   {name:"Jane Roe",dob:"09/02/1982",sex:"F",height:"5'6\"",hair:"Black",eyes:"Brown",address:"220 Bridge Road, South Staunton",licence:"Suspended",status:"Clear",record:"Grand theft auto (2006)",notes:"Probation ends March 2009.",img:""},
+   {name:"Michael Smith",dob:"11/23/1990",sex:"M",height:"5'10\"",hair:"Blond",eyes:"Green",address:"9 Park Boulevard, West Staunton",licence:"Valid",status:"Clear",record:"None",notes:"",img:""}
+  ]},
+ vehicles:{label:"VEHICLES",
+  fields:"plate|Plate,year|Year,make|Make,model|Model,colour|Colour,owner|Registered owner,reg|Registration,status|Status,notes|Notes",
+  cols:"plate,year,make,model,status",
+  data:[
+   {plate:"STA 4821",year:"2006",make:"Declasse",model:"Sentinel",colour:"Black",owner:"John Doe",reg:"Valid",status:"Stolen",notes:"Reported stolen from North Staunton.",img:""},
+   {plate:"KJR 3390",year:"2004",make:"Vapid",model:"Stanier",colour:"White",owner:"Jane Roe",reg:"Expired",status:"Clear",notes:"",img:""},
+   {plate:"LMN 7715",year:"2007",make:"Karin",model:"Dilettante",colour:"Silver",owner:"Michael Smith",reg:"Valid",status:"Clear",notes:"",img:""}
+  ]},
+ firearms:{label:"FIREARMS",
+  fields:"serial|Serial number,type|Type,make|Make,model|Model,calibre|Calibre,owner|Registered owner,licence|Licence,status|Status,notes|Notes",
+  cols:"serial,type,model,owner,status",
+  data:[
+   {serial:"SC-100234",type:"Pistol",make:"Glock",model:"17",calibre:"9mm",owner:"Michael Smith",licence:"Valid",status:"Registered",notes:"Concealed carry permit on file.",img:""},
+   {serial:"SC-558120",type:"Shotgun",make:"Remington",model:"870",calibre:"12 gauge",owner:"John Doe",licence:"None",status:"Unregistered",notes:"Linked to armed robbery case.",img:""},
+   {serial:"SC-330417",type:"Revolver",make:"Smith & Wesson",model:"Model 10",calibre:".38 Special",owner:"Jane Roe",licence:"Expired",status:"Stolen",notes:"Reported stolen, South Staunton.",img:""}
+  ]}
+};
+/* ===================================================================== */
+
+const $=id=>document.getElementById(id), esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const img=(src,txt)=>`<div class="ph" style="width:100%;height:100%">${src?`<img src="${esc(src)}" alt="" onerror="this.remove()">`:txt}</div>`;
+const F=t=>DB[t].fields.split(",").map(s=>s.split("|"));
+const tag=v=>{const c=/wanted|stolen|suspend|revoked|expired|unregistered/i.test(v)?"bad":/clear|valid|registered|licensed/i.test(v)?"ok":"";return `<span class="tag ${c}">${esc(v).toUpperCase()}</span>`};
+const cell=(k,v)=>/^(status|reg|licence)$/.test(k)?tag(v):esc(v);
+let cur="home";
+function logout(){sessionStorage.removeItem("scpdAuth");location.replace("database.html")}
+function nav(t){cur=t;$("tabs").innerHTML=["home",...Object.keys(DB)].map(k=>`<a tabindex="0" class="${k===t?"on":""}" onclick="nav('${k}')" onkeydown="if(event.key==='Enter')nav('${k}')">${k==="home"?"HOME":DB[k].label}</a>`).join("");
+  if(t==="home"){$("main").innerHTML=`<div class="home"><div class="l">SCPD RECORDS DATABASE<br><br>HIGHLY CLASSIFIED INFORMATION<br><br>FOR OFFICIAL USE ONLY<div class="warn"><svg width="90" height="36" viewBox="0 0 90 36"><path d="M3 18Q45 -8 87 18Q45 44 3 18Z" fill="none" stroke="#f0b81e" stroke-width="3"/><circle cx="45" cy="18" r="9" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="4 3"/></svg>YOU HAVE BEEN WARNED</div></div>
+   <div class="r"><div class="cap">${esc(MOTTO)}</div><div style="height:300px">${img(HERO,"HOME IMAGE (480 × 360)")}</div></div></div>`;badges();return}
+  $("main").innerHTML=`<div class="tool"><input id="q" placeholder="SEARCH ${DB[t].label}..." oninput="list()" autocomplete="off"><span id="n"></span></div><div id="list"></div>`;list();$("q").focus();
+}
+function list(){
+  const t=cur,q=$("q").value.trim().toLowerCase(),f=Object.fromEntries(F(t)),cols=DB[t].cols.split(",");
+  const rows=DB[t].data.map((r,i)=>[r,i]).filter(([r])=>!q||Object.values(r).join(" ").toLowerCase().includes(q));
+  $("n").textContent=rows.length+" OF "+DB[t].data.length+" RECORDS";
+  $("list").innerHTML=rows.length?`<table><tr>${cols.map(c=>`<th>${esc(f[c]).toUpperCase()}</th>`).join("")}</tr>${rows.map(([r,i])=>`<tr class="row" tabindex="0" onclick="show('${t}',${i})" onkeydown="if(event.key==='Enter')show('${t}',${i})">${cols.map(c=>`<td>${cell(c,r[c])}</td>`).join("")}</tr>`).join("")}</table>`:`<div class="empty">NO RECORDS FOUND.</div>`;
+}
+function show(t,i){
+  const r=DB[t].data[i];
+  $("main").innerHTML=`<button class="bk" onclick="nav('${t}')">&larr; BACK TO LIST</button><div class="det"><div class="ph" style="width:200px;height:240px">${r.img?`<img src="${esc(r.img)}" alt="" onerror="this.remove()">`:"PHOTO"}</div><dl>${F(t).map(([k,l])=>`<dt>${esc(l)}</dt><dd>${k==="owner"?`<a onclick="jump('${esc(r[k]).replace(/'/g,"\\'")}')">${esc(r[k])}</a>`:cell(k,r[k]||"—")}</dd>`).join("")}</dl></div>`;
+}
+function jump(name){nav("persons");$("q").value=name;list()}
+function badges(){document.querySelectorAll("[data-badge]").forEach(e=>{e.innerHTML=BADGE?`<img src="${esc(BADGE)}" alt="" onerror="this.remove()">`:""})}
+badges();nav("home");
+</script></body></html>
